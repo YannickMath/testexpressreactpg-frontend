@@ -1,27 +1,30 @@
-import { useState } from "react"
+import { useState } from "react";
+import { useRouter } from "next/router";
 
+export default function Login() {
+  const router = useRouter();
 
-export default function Example() {
+  const [login, setLogin] = useState({
+    email: "",
+    password: "",
+  });
 
-const [login, setLogin] = useState({
-  email: "",
-  password: ""
-})
+  const handleChange = (e) => {
+    setLogin({
+      ...login,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-const handleChange = (e) => {
-  setLogin({
-    ...login,
-    [e.target.name]: e.target.value
-  })
-}
-
-
-console.log("login", login)
+  // Utilisation de router.push pour naviguer
+  const navigateToSignup = () => {
+    router.push("/signup");
+    console.log("go to signup page");
+  };
 
   return (
     <>
- 
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+       <div className="flex h-screen w-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-10 w-auto"
@@ -36,7 +39,10 @@ console.log("login", login)
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
             <div>
-              <label htmlFor="email" className="block text-xl font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="email"
+                className="block text-xl font-medium leading-6 text-gray-900"
+              >
                 Email address
               </label>
               <div className="mt-2">
@@ -54,11 +60,17 @@ console.log("login", login)
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-xl font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-xl font-medium leading-6 text-gray-900"
+                >
                   Password
                 </label>
                 <div className="text-xl">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                  >
                     Forgot password?
                   </a>
                 </div>
@@ -87,13 +99,17 @@ console.log("login", login)
           </form>
 
           <p className="mt-10 text-center text-xl text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-             Create your account
+            Not a member?{" "}
+            <a
+              href="#"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              onClick={navigateToSignup}
+            >
+              Create your account
             </a>
           </p>
         </div>
       </div>
     </>
-  )
+  );
 }
